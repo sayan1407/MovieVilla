@@ -1,0 +1,42 @@
+﻿@model MovieVilla.ViewModel.CustomerViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Title</h2>
+@using (Html.BeginForm("Save","Customers"))
+{
+    <div class="form-group">
+        
+        @Html.HiddenFor(m => m.customer.Id)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.customer.Name)
+        @Html.TextBoxFor(m => m.customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.customer.Name,"", new { @class = "text-danger"})
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.customer.BirthDate)
+        @Html.TextBoxFor(m => m.customer.BirthDate, "{0:dd/MM/yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.customer.BirthDate, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.customer.MembershipTypeId)
+        @Html.DropDownListFor(m => m.customer.MembershipTypeId, new SelectList(Model.membershipTypes, "MembershipTypeId", "Description"), "Select Membersip Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.customer.MembershipTypeId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.customer.IsSubscribedToNewsLetter) Subscribed To Newsletter?
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "MovieVilla";
+}
+
+<h2>Customers</h2>
+
+<a href='@Url.Action("EditMovies", "Movies")' class="btn btn-primary">
+    Create New Movie
+</a>
+<table id="tblMovie" class="table">
+    <thead>
+
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Genre
+            </th>
+            <th>
+                Release Date
+            </th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#tblMovie").DataTable({
+                ajax: {
+                    url: "/api/movies",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function(data, type, movie) {
+                            return "<a href='/Movies/EditMovies/" + movie.id + "'>" + movie.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "genre"
+                    },
+                    {
+                        data: "releaseDate",
+                        render: function (data) {
+
+                          var date = new Date(data);
+                          var month = date.getMonth() + 1;
+                          return (month.toString().length > 1 ? month : "0" + month) + "/" + date.getDate() + "/" + date.getFullYear();
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function(data) {
+                            return "<button class='btn-link js-delete' data-movie-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
+            $("#tblMovie").on("click",".js-delete",function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure to delete this movie?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/movies/" + button.attr("data-movie-id"),
+                            method: "DELETE",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+
+                        });
+
+                    }
+                });
+            });
+        });
+
+    </script>
+}

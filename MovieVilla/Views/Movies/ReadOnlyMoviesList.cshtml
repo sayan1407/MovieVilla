@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "MovieVilla";
+}
+
+<h2>Customers</h2>
+
+
+<table id="tblMovie" class="table">
+    <thead>
+
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Genre
+            </th>
+            <th>
+                Release Date
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#tblMovie").DataTable({
+                ajax: {
+                    url: "/api/movies",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "genre"
+                    },
+                    {
+                        data: "releaseDate",
+                        render: function (data) {
+
+                          var date = new Date(data);
+                          var month = date.getMonth() + 1;
+                          return (month.toString().length > 1 ? month : "0" + month) + "/" + date.getDate() + "/" + date.getFullYear();
+                        }
+                    }
+                ]
+            });
+
+        });
+
+    </script>
+}
