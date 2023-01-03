@@ -13,7 +13,8 @@ namespace MovieVilla
                         "~/Scripts/bootstrap.js",
                        "~/Scripts/bootbox.js",
                        "~/Scripts/DataTables/jquery.dataTables.js",
-                       "~/Scripts/DataTables/dataTables.bootstrap.js"));
+                       "~/Scripts/DataTables/dataTables.bootstrap.js",
+                       "~/Scripts/jquery-ui.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -30,7 +31,8 @@ namespace MovieVilla
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-lumen.css",
                       "~/Content/site.css",
-                      "~/Content/DataTables/css/dataTables.bootstrap.css"
+                      "~/Content/DataTables/css/dataTables.bootstrap.css",
+                      "~/Content/jquery-ui.css"
                       ));
         }
     }

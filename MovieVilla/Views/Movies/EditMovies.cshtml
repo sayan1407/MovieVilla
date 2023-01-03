@@ -22,12 +22,24 @@
     <div class="form-group">
         @Html.LabelFor(m => m.ReleaseDate)
         @Html.TextBoxFor(m => m.ReleaseDate, "{0:dd/MM/yyyy}", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.ReleaseDate,"", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(m => m.ReleaseDate, "", new { @class = "text-danger" })
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
 }
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+     $(document).ready(function () {
+         $('input[type=datetime]').datepicker({
+             dateFormat: "dd/M/yy",
+             changeMonth: true,
+             changeYear: true,
+             yearRange: "-60:+0"
+         });
+
+     });
+    </script>
 }
 

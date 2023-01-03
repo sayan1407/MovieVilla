@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using MovieVilla.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,7 +21,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Customers", "CustomersList", "Customers")</li>
+                    @if(User.IsInRole(Role.canManageMovies))
+                    {
+                       <li>@Html.ActionLink("Customers", "CustomersList", "Customers")</li>
+                    }
                     <li>@Html.ActionLink("Movies","MoviesList","Movies")
                     </li>
                 </ul>

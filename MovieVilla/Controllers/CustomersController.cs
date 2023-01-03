@@ -9,6 +9,7 @@ using AutoMapper;
 
 namespace MovieVilla.Controllers
 {
+    [Authorize(Roles = Role.canManageMovies)]
     public class CustomersController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
@@ -22,7 +23,7 @@ namespace MovieVilla.Controllers
             return View("ReadOnlyCustomersList");
 
         }
-        [Authorize(Roles = Role.canManageMovies)]
+        
 
         public ActionResult Details(int? id)
         {

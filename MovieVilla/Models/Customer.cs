@@ -13,6 +13,10 @@ namespace MovieVilla.Models
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
+        [MinAge18YearsCheck]
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Date of Birth")]
+        [DisplayFormat(ApplyFormatInEditMode = true,DataFormatString ="{0:dd/MM/yyyy}")]
         public DateTime? BirthDate { get; set; }
         public bool IsSubscribedToNewsLetter { get; set; }
         [Required]
